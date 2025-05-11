@@ -8,19 +8,24 @@ const Header = () => {
   return (
     <header className="flex justify-between items-center p-4">
       <Link className="flex items-center gap-2" to="/">
-        <img className="w-[50px]" src="/pngwing.com.png" alt="logo" />
-        <h1 className="text-2xl hidden md:block font-mono font-semibold">Youtube</h1>
+        <img className="w-[50px]" src="/youtube.png" alt="logo" />
+        <h1 className="text-2xl hidden md:block font-mono font-semibold">
+          Youtube
+        </h1>
       </Link>
       <form className="flex items-center border border-gray-400 rounded-[20px] overflow-hidden">
-        <input className="bg-black text-white px-3 py-1 outline-none" type="text" />
+        <input
+          className="bg-black text-white px-3 py-1 outline-none"
+          type="text"
+        />
         <button className="border-l px-2 text-xl">
           <IoIosSearch />
         </button>
       </form>
       <div className="flex gap-3 text-xl cursor-pointer">
-        <FaBell className="hover:text-gray-400 transition duration-[250ms]"/>
-        <IoVideocam className="hover:text-gray-400 transition duration-[250ms]"/>
-        <MdVideoLibrary className="hover:text-gray-400 transition duration-[250ms]"/>
+        <FaBell className="hover:text-gray-400 transition duration-[250ms]" />
+        <IoVideocam className="hover:text-gray-400 transition duration-[250ms]" />
+        <MdVideoLibrary className="hover:text-gray-400 transition duration-[250ms]" />
       </div>
     </header>
   );
