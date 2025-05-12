@@ -7,13 +7,12 @@ import VideoCard from "../components/VideoCard";
 
 const Feed = () => {
   const { videos, error, isLoading } = useContext(VideoContext);
-
   return (
     <div className="flex">
       <SideBar />
 
       <div className="videos">
-        {isLoading ? (
+        {true ? (
           <Loader />
         ) : error ? (
           <ErrorDisplay error={error} />

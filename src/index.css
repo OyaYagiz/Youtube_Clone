@@ -7,3 +7,22 @@ body{
     color: white;
     overflow: hidden;
 }
+
+.videos{
+    width: 100%;
+    display: grid;
+    gap: 50px;
+    height: 100vh;
+    overflow: auto;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    padding: 20px;
+}
+
+.videos::-webkit-scrollbar {
+    background: transparent;
+    width: 8px;
+    border-radius: 5px;
+}
+.videos::-webkit-scrollbar-thumb{
+    background: #686767;
+}
