@@ -12,7 +12,7 @@ const Feed = () => {
       <SideBar />
 
       <div className="videos">
-        {true ? (
+        {isLoading ? (
           <Loader />
         ) : error ? (
           <ErrorDisplay error={error} />
@@ -20,7 +20,7 @@ const Feed = () => {
           videos?.map(
             (item) =>
               item.type === "video" && (
-                <VideoCard video={item} key={item.videoId} />
+                <VideoCard key={item.video.videoId} video={item.video} />
               )
           )
         )}
