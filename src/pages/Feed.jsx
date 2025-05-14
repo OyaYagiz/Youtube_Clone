@@ -7,6 +7,7 @@ import VideoCard from "../components/VideoCard";
 
 const Feed = () => {
   const { videos, error, isLoading } = useContext(VideoContext);
+
   return (
     <div className="flex">
       <SideBar />
@@ -20,7 +21,7 @@ const Feed = () => {
           videos?.map(
             (item) =>
               item.type === "video" && (
-                <VideoCard key={item.video.videoId} video={item.video} />
+                <VideoCard video={item} key={item.videoId} />
               )
           )
         )}
