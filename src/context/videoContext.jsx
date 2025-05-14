@@ -6,14 +6,18 @@ export const VideoContext = createContext();
 
 export const VideoProvider = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [lastFetchedCategory, setLastFetchedCategory] = useState(null);
   const [videos, setVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const type = selectedCategory.type;
-    if (type === "menu") return;
 
+    // ❌ Menü ya da aynı kategori tekrar seçildiyse istek atma
+    if (type === "menu" || selectedCategory.name === lastFetchedCategory?.name) return;
+
+    setLastFetchedCategory(selectedCategory); // ✅ Kategoriyi güncelle
     setIsLoading(true);
 
     const url =
@@ -27,7 +31,6 @@ export const VideoProvider = ({ children }) => {
 
     const params = type === "category" ? { q: selectedCategory.name } : {};
 
-    //Api isteği at ve durumu state aktar
     api
       .get(url, { params })
       .then((res) => setVideos(res.data.contents || res.data.data))

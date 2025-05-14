@@ -18,11 +18,13 @@ const Feed = () => {
         ) : error ? (
           <ErrorDisplay error={error} />
         ) : (
-          videos?.map(
-            (item) =>
-              item.type === "video" && (
-                <VideoCard video={item} key={item.videoId} />
-              )
+          videos?.map((item, index) =>
+            item.type === "video" ? (
+              <VideoCard
+                video={item}
+                key={item.videoId || item.id?.videoId || index}
+              />
+            ) : null
           )
         )}
       </div>
