@@ -14,10 +14,11 @@ export const VideoProvider = ({ children }) => {
   useEffect(() => {
     const type = selectedCategory.type;
 
-    // ❌ Menü ya da aynı kategori tekrar seçildiyse istek atma
-    if (type === "menu" || selectedCategory.name === lastFetchedCategory?.name) return;
+    // Menü ya da aynı kategori tekrar seçildiyse istek atma
+    if (type === "menu" || selectedCategory.name === lastFetchedCategory?.name)
+      return;
 
-    setLastFetchedCategory(selectedCategory); // ✅ Kategoriyi güncelle
+    setLastFetchedCategory(selectedCategory);
     setIsLoading(true);
 
     const url =
@@ -33,7 +34,19 @@ export const VideoProvider = ({ children }) => {
 
     api
       .get(url, { params })
-      .then((res) => setVideos(res.data.contents || res.data.data))
+      .then((res) => {
+        console.log("API response data:", res.data); // <-- Burada API cevabını görebilirsin
+        // videos verisini esnek şekilde alıyoruz:
+        let fetchedVideos = [];
+
+        if (res.data.contents) {
+          fetchedVideos = res.data.contents;
+        } else if (res.data.list) {
+          fetchedVideos = res.data.list.filter((item) => item.type === "video");
+        }
+
+        setVideos(fetchedVideos);
+      })
       .catch((error) => setError(error?.message || "Hata oluştu"))
       .finally(() => setIsLoading(false));
   }, [selectedCategory]);

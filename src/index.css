@@ -7,7 +7,6 @@ body{
     color: white;
     overflow: hidden;
 }
-
 .videos{
     width: 100%;
     display: grid;
@@ -17,6 +16,7 @@ body{
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     padding: 20px;
 }
+
 
 .videos::-webkit-scrollbar {
     background: transparent;
