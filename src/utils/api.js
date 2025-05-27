@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: "https://youtube138.p.rapidapi.com/",
   params: { hl: "tr", gl: "TR" },
   headers: {
-    "x-rapidapi-key": "9fec598be9mshd85e408ed6011fep182e47jsn9f70b43c622f",
+    "x-rapidapi-key": "540b8ce973msh3fcab752cec3e7ap1c3e91jsnebe08ba2523c",
     "x-rapidapi-host": "youtube138.p.rapidapi.com",
   },
 });

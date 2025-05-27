@@ -1,9 +1,12 @@
 import millify from "millify";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
   const [isHover, setIsHover] = useState(false);
   const [currentThumbIndex, setCurrentThumbIndex] = useState(0);
+  const navigate = useNavigate();
+  console.log(video);
 
   // Hover sırasında animasyon için kullanılacak thumbnail dizisi
   // Kategorilerde movingThumbnails var, trending'de videoThumbnails olabilir.
@@ -38,15 +41,15 @@ const VideoCard = ({ video }) => {
         : null);
 
   if (!thumbnailUrl) return null; // Resim yoksa render etme
-
   return (
     <div
+      onClick={() => navigate(`/watch?v=${video.videoId}`)}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       className="cursor-pointer w-full max-w-sm"
     >
       <img
-        className="rounded-lg w-full h-auto object-cover"
+        className="rounded-lg w-full aspect-video object-cover"
         src={thumbnailUrl}
         alt={video.title}
       />
