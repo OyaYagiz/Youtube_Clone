@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { categories } from "../constants";
 import api from "../utils/api";
 
-// 1) Context remeli oluştur
+// 1) Context temeli oluştur
 export const VideoContext = createContext();
 
 // 2) Sağlayıcı bilşenini oluştur
@@ -13,16 +13,16 @@ export const VideoProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // seçilen type'ı belirle
+    //3 seçilen type'ı belirle
     const type = selectedCategory.type;
 
-    // seçilen kategorinin type'ı menü ise fonksiyonu durdur
+    //4 seçilen kategorinin type'ı menü ise fonksiyonu durdur
     if (type === "menu") return;
 
-    // yüklenmeyi true'ya çek
+    //5 yüklenmeyi true'ya çek
     setIsLoading(true);
 
-    // istek atılacak url'i belirle
+    //6 istek atılacak url'i belirle
     const url =
       type === "home"
         ? "/home"
@@ -32,7 +32,7 @@ export const VideoProvider = ({ children }) => {
         ? `/search?query=${selectedCategory.name}`
         : "";
 
-    // api isteği at ve durumu state aktar
+    //7 api isteği at ve durumu state aktar
     api
       .get(url)
       .then((res) => setVideos(res.data.data))

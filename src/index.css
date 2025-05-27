@@ -26,3 +26,15 @@ body{
 .videos::-webkit-scrollbar-thumb{
     background: #686767;
 }
+
+/* detail page*/
+.detail-page{
+    display: grid;
+    grid-template-columns: auto 400px;
+}
+@media (max-width:1000px) {
+    .detail-page{
+        grid-template-columns: 1fr;
+    }
+    
+}
