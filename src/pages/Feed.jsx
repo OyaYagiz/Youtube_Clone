@@ -8,16 +8,6 @@ import VideoCard from "../components/VideoCard";
 const Feed = () => {
   const { videos, error, isLoading } = useContext(VideoContext);
 
-  const filteredVideos = videos.filter((item) => {
-    if (item.type === "video" && item.video && item.video.videoId) {
-      return true;
-    }
-    if (item.type === "video" && item.videoId) {
-      return true;
-    }
-    return false;
-  });
-
   return (
     <div className="flex">
       <SideBar />
@@ -28,10 +18,12 @@ const Feed = () => {
         ) : error ? (
           <ErrorDisplay error={error} />
         ) : (
-          filteredVideos.map((item) => {
-            const videoData = item.video ? item.video : item;
-            return <VideoCard video={videoData} key={videoData.videoId} />;
-          })
+          videos?.map(
+            (item) =>
+              item.type === "video" && (
+                <VideoCard video={item} key={item.videoId} />
+              )
+          )
         )}
       </div>
     </div>

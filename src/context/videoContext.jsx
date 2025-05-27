@@ -2,52 +2,41 @@ import { createContext, useEffect, useState } from "react";
 import { categories } from "../constants";
 import api from "../utils/api";
 
+// 1) Context remeli oluştur
 export const VideoContext = createContext();
 
+// 2) Sağlayıcı bilşenini oluştur
 export const VideoProvider = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-  const [lastFetchedCategory, setLastFetchedCategory] = useState(null);
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // seçilen type'ı belirle
     const type = selectedCategory.type;
 
-    // Menü ya da aynı kategori tekrar seçildiyse istek atma
-    if (type === "menu" || selectedCategory.name === lastFetchedCategory?.name)
-      return;
+    // seçilen kategorinin type'ı menü ise fonksiyonu durdur
+    if (type === "menu") return;
 
-    setLastFetchedCategory(selectedCategory);
+    // yüklenmeyi true'ya çek
     setIsLoading(true);
 
+    // istek atılacak url'i belirle
     const url =
       type === "home"
         ? "/home"
         : type === "trending"
-        ? "/v2/trending"
+        ? "/trending"
         : type === "category"
-        ? "/search"
+        ? `/search?query=${selectedCategory.name}`
         : "";
 
-    const params = type === "category" ? { q: selectedCategory.name } : {};
-
+    // api isteği at ve durumu state aktar
     api
-      .get(url, { params })
-      .then((res) => {
-        console.log("API response data:", res.data); // <-- Burada API cevabını görebilirsin
-        // videos verisini esnek şekilde alıyoruz:
-        let fetchedVideos = [];
-
-        if (res.data.contents) {
-          fetchedVideos = res.data.contents;
-        } else if (res.data.list) {
-          fetchedVideos = res.data.list.filter((item) => item.type === "video");
-        }
-
-        setVideos(fetchedVideos);
-      })
-      .catch((error) => setError(error?.message || "Hata oluştu"))
+      .get(url)
+      .then((res) => setVideos(res.data.data))
+      .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
   }, [selectedCategory]);
 

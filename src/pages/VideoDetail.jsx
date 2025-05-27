@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import api from "../utils/api";
 
 const VideoDetail = () => {
+  const [video, setVideo] = useState(null);
   //1) arama parametresi
   const [searchParams] = useSearchParams();
 
@@ -9,7 +11,9 @@ const VideoDetail = () => {
   const id = searchParams.get("v");
 
   //3) id'si bilinen videonun bilgilerini api'den al
-  useEffect(() => {}, []);
+  useEffect(() => {
+    api.get;
+  }, []);
   return <div>VideoDetail</div>;
 };
 
