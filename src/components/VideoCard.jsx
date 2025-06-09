@@ -16,7 +16,7 @@ const VideoCard = ({ video, isRow }) => {
       {/* resim alanı */}
       <div>
         <img
-          className="rounded-lg w-full h-full"
+          className="v-pic rounded-lg w-full h-full"
           src={
             isHover && video.richThumbnail
               ? video.richThumbnail[0].url

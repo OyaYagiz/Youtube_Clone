@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: "https://yt-api.p.rapidapi.com/",
   params: { hl: "tr", gl: "TR" },
   headers: {
-    "x-rapidapi-key": "540b8ce973msh3fcab752cec3e7ap1c3e91jsnebe08ba2523c",
+    "x-rapidapi-key": "756d0c1442msh153e7d65fc912a8p1d303ajsn3ab32182bfe9",
     "x-rapidapi-host": "yt-api.p.rapidapi.com",
   },
 });
